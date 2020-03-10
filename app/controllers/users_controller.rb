@@ -30,6 +30,30 @@ def my_friends
     end
 end
 
+def my_portfolio_update
+    err_messages = []
+    @tracked_stocks = current_user.stocks
+    @tracked_stocks.each do |stock|
+      new_stock = Stock.new_lookup(stock.ticker)
+      if new_stock
+        if new_stock.last_price != stock.last_price
+          stock.before_price = stock.last_price
+          stock.last_price = new_stock.last_price
+        end
+        if stock.save
+          err_messages << "#{stock.ticker}: Updated"
+        else
+          err_messages << "#{stock.ticker}: DatabaseErr"
+        end
+      else
+        err_messages << "#{stock.ticker}: ConectionErr"
+      end
+    end
+    flash[:notice] = err_messages.join(", ")
+    redirect_to my_portfolio_path
+  end
+  
+
 def show
     @user = User.find(params[:id])
     @tracked_stocks = @user.stocks
