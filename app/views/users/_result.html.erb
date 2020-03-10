@@ -11,6 +11,24 @@
     <strong>name:</strong><%=@stock.name%>
     <strong>price:</strong><%=@stock.last_price%>
 
+    <% if current_user.can_track_stock?(@stock.ticker)%>
+    <%= link_to 'AddProtfolio', user_stocks_path(user:current_user,ticker:@stock.ticker),class:"btn btn-sm btn-success",method: :post %>
+
+    <% else %>
+
+    <span class ="badge badge-secondary">
+      already Tracking 
+     <% if !current_user.under_stock_limit?%>
+        10 Stocks
+     <%end %>
+
+     <% if current_user.stock_already_tracked?(@stock.ticker) %>
+       this stock
+       <% end %>
+    </span>
+
+    <% end %>
+
  </div>
 
 <%end %>
