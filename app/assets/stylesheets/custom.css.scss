@@ -1,10 +1,7 @@
 @import "bootstrap";
 
-.container{
-	padding-top:15px;
-}
 .search-area{
-	padding-top:60px;
+	padding-top:50px;
 }
 .no-right-padding
 {
@@ -16,5 +13,9 @@
 }
 .results-block{
 	display:inline-block;
+	margin-bottom:1rem;
 	
+}
+.logout-button{
+	margin-right:5px;
 }

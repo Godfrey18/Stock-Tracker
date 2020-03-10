@@ -1,3 +1,5 @@
+
+<% if @tracked_stocks.present? %>
 <div class ="row">
 	<div class ="col-9">
 
@@ -14,8 +16,7 @@
   	<%@tracked_stocks.each do |stock| %>
     <tr>
       <th scope="row"><%=stock.ticker%></th>
-     
-        <td><%=stock.name%></td>
+         <td><%=stock.name%></td>
          <td><%=stock.last_price%></td>
          <td>Actions</td>
     </tr>
@@ -24,4 +25,7 @@
 </table>
 </div>
 </div>
+<% end %>
+
+
 
